@@ -1,0 +1,404 @@
+HILOS:
+un hilo se usa para ejecutar diferentes procesos en un mismo orden momento.
+
+ Los hilos de ejecución que comparten los mismos recursos, sumados a estos recursos, son en conjunto conocidos como un proceso.
+ 
+ Con los hilos se puede extender de Thread o se puede implementar Runnable
+ 	pero se debe hacer 
+ 		@Override
+ 		public void run(){//Codigo ha ejecutar}
+ 		
+cuando se implementa de Runnable, se debe crear un objeto pero de la clase Thread al hacer el llamado
+	Ejemplo Thread hilo = new Thread(new Proceso2());
+	
+	se crea un objeto Thread, pero dentro del new THread se coloca, la clase donde esta alojado el metodo.
+
+cuando se extiende de Thread, se accede creando un objeto de la clase.
+
+Hilos con parametros:
+class Proceso {
+
+
+//Parametro del hilo definido
+int num_int;
+
+public Proceso(String nameHilo){
+	super(nameHilo);
+}
+//Metodo definido dentro de Thread para definir los hilos
+@Override
+public void run(){
+	for(int i = 0; i <= num_int; i+++){
+
+		System.out.println(i + this.getName());
+	}	
+	System.out.println();
+}
+
+	//
+	public void ValorCondicion(int valor){
+		this.num_int = valor;
+	}
+}
+
+public static void main(String[] args) {
+
+	Proceso hilo1 = new Proceso(" Hilo 1");
+	Proceso hilo2 = new Proceso(" Hilo 2");
+	Proceso hilo3 = new Proceso(" Hilo 3");
+
+	//Paso de parametros hacia el hilo
+	hilo1.ValorCondicion(5);
+	hilo2.ValorCondicion(10);
+	hilo3.ValorCondicion(10);
+
+	//Llamada del hilo con su metodo de inicio
+	hilo1.start();
+	hilo2.start();
+	hilo3.start();
+}
+
+/*********************************************************************************************************************** */
+Estados o ciclo de vida de un hilo: 
+
+	Los hilos presentan distintos estados desde su creacion 
+	hasta su finalizacion.
+
+	*Estado nuevo o new: ha sido creado pero no inicializado, es decir
+	no se ha ejecutado todavia el metodo start().
+
+	NOTA: se produce un error del tipo illegalThreadStateException
+	si se intenta ejecutar cualquier metodo de la clase Thread Excetp con el metodo start()
+
+	-Ejemplo
+
+	class ProcesoEstadoNuevo extends Thread{
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.println(i + this.getName());
+			}
+
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		//No se ha ejecutado, pero esta creado
+		ProcesoEstadoNuevo hilo1 = new ProcesoEstadoNuevo();
+		ProcesoEstadoNuevo hilo2 = new ProcesoEstadoNuevo();
+	}
+
+
+/*********************************************************************************************************************** */
+	*Estado ejecutable o Runnable: el metodo start() crea los recursos
+	dek sistema necesarios para ejecutar el hilo, programa el thread para ejecutarse,
+	y llama al metodo run() del thread.
+
+	-Ejemplo
+
+	class ProcesoEstadoRunnable extends Thread{
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.println(i + this.getName());
+			}
+
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		//Primer estado: No se ha ejecutado, pero esta creado
+		ProcesoEstadoNuevo hilo1 = new ProcesoEstadoNuevo();
+
+		//Segundo estado: Ejecutando el hilo con el metodo start
+		hilo1.start();
+	}
+
+/*********************************************************************************************************************** */
+	*Estado bloqueado o not Runnable: El hilo se encuentra en ejecucion
+	pero existe una tarea o actividad del mismo hilo que lo impide
+
+	-Ejemplo:
+
+	class ProcesoEstadoNotRunnable extends Thread{
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.println(i + this.getName());
+			}
+
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		//Primer estado: No se ha ejecutado, pero esta creado
+		ProcesoEstadoNotRunnable hilo1 = new ProcesoEstadoNotRunnable();
+		ProcesoEstadoNotRunnable hilo2 = new ProcesoEstadoNotRunnable();
+
+		//Segundo estado: Ejecutando el hilo con el metodo start
+		
+		hilo1.start(); //Flujo: Ejecuta el hilo 1 
+
+		//Tercer estado: Usando el metodo sleep, se bloquea o se detiene el hilo
+		//El metodo sleep, puede recibir Milisegunos y nanos segundos
+
+		/** 
+		 * 0.5 segundos son 500 milisegundos
+		 * 1 segundos son 1000 milisegundos
+		 * 2.5 segundos son 2500 milisegundos 
+		 * 1 hora son 3.600.000 milisegundos*/
+
+		try { //Flujo: Se detiene 3 segundos
+
+			//La ejecucion del hilo 1 se detiene por 1 segundo
+			//Mientras se ejecuta esto, se imprimen los valores del hilo 2
+			hilo1.sleep(3000);
+
+		} catch (InterruptedException e) {
+
+			System.out.println("ERROR EN HILO 1 " + e);
+		}
+
+
+		hilo2.start(); //Flujo: Ejecuta el hilo 2
+
+
+		try { //Flujo: Antes de finalizar se detiene 2 segundos
+
+			//Antes de finalizar el programa se detiene 2 segundos
+			hilo2.sleep(2000);	
+
+		} catch (InterruptedException e) {
+
+			System.out.println("ERROR EN HILO 2 " + e);
+		}
+	}
+
+/*********************************************************************************************************************** */
+	*Estado muerto/finalizado o dead: un hilo puede morir de 2 formas,
+	natural o asesinado. Una muerte natural se produce cuando su metodo 
+	run() termina normalmente. Mientras una muerte provocada es cuando una instruccion
+	que finalice el hilo sin haber terminado
+
+	class ProcesoEstadoDead extends Thread{
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.println(i + this.getName());
+			}
+
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		//Primer estado: No se ha ejecutado, pero esta creado
+		ProcesoEstadoNotRunnable hilo1 = new ProcesoEstadoNotRunnable();
+		ProcesoEstadoNotRunnable hilo2 = new ProcesoEstadoNotRunnable();
+
+		//Segundo estado: Ejecutando el hilo con el metodo start
+		
+		hilo1.start(); //Flujo: Ejecuta el hilo 1 
+
+		//Tercer estado: Usando el metodo sleep, se bloquea o se detiene el hilo
+		//El metodo sleep, puede recibir Milisegunos y nanos segundos
+
+		/** 
+		 * 0.5 segundos son 500 milisegundos
+		 * 1 segundos son 1000 milisegundos
+		 * 2.5 segundos son 2500 milisegundos 
+		 * 1 hora son 3.600.000 milisegundos*/
+
+		try { //Flujo: Se detiene 3 segundos
+
+			//La ejecucion del hilo 1 se detiene por 1 segundo
+			//Mientras se ejecuta esto, se imprimen los valores del hilo 2
+			hilo1.sleep(3000);
+
+		} catch (InterruptedException e) {
+
+			System.out.println("ERROR EN HILO 1 " + e);
+		}
+
+		hilo1.stop();
+		hilo2.start(); //Flujo: Ejecuta el hilo 2
+		hilo2.stop(); //Muerte provocada del hilo
+
+		try { //Flujo: Antes de finalizar se detiene 2 segundos
+
+			//Antes de finalizar el programa se detiene 2 segundos
+			hilo2.sleep(2000);	
+
+		} catch (InterruptedException e) {
+
+			System.out.println("ERROR EN HILO 2 " + e);
+		}
+	}
+
+
+
+/*********************************************************************************************************************** */
+Sicronizacion de Hilos: permite controlar el tiempo y forma de ejecucion de varios 
+hilos ejecutandose de manera simultanea.
+
+	class SicronizacionHilos1 extends Thread{
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 10; i+++){
+
+				System.out.print( i + ": G");
+
+				try { 
+			
+					SicronizacionHilos1.sleep(1000);	
+			
+				} catch (InterruptedException e) {
+			
+					System.out.println("ERROR INTERNO EN HILO 1 " + e);
+				}
+			}
+		}
+
+
+	class SicronizacionHilos2 extends Thread{
+
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.print("E");
+
+				try { 
+			
+					SicronizacionHilos2.sleep(1000);	
+			
+				} catch (InterruptedException e) {
+			
+					System.out.println("ERROR INTERNO EN HILO 2 " + e);
+				}
+			}
+
+
+		}
+	}
+	class SicronizacionHilos3 extends Thread{
+
+		@Override
+		public void run(){
+			
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.print("E");
+
+				try { 
+			
+					SicronizacionHilos3.sleep(1000);	
+			
+				} catch (InterruptedException e) {
+			
+					System.out.println("ERROR INTERNO EN HILO 3 " + e);
+				}
+			}
+
+		}
+	}
+	class SicronizacionHilos4 extends Thread{
+
+		@Override
+		public void run(){
+
+			for(int i = 0; i <= 5; i+++){
+
+				System.out.println("K");
+
+				try { 
+			
+					SicronizacionHilos4.sleep(1000);	
+			
+				} catch (InterruptedException e) {
+			
+					System.out.println("ERROR INTERNO EN HILO 4 " + e);
+				}
+			}
+		}
+	}
+}
+public static void main(String[] args) {
+
+	SicronizacionHilos1 hilo1 = new SicronizacionHilos1();
+	SicronizacionHilos2 hilo2 = new SicronizacionHilos2();
+	SicronizacionHilos3 hilo3 = new SicronizacionHilos3();
+	SicronizacionHilos4 hilo4 = new SicronizacionHilos4();
+
+
+	//HILO 1
+	hilo1.start();
+	try { 
+
+		
+		hilo1.sleep(10);	
+
+	} catch (InterruptedException e) {
+
+		System.out.println("ERROR EN HILO 1 " + e);
+	}
+
+	//HILO 2
+	hilo2.start();
+	try { 
+
+		
+		hilo2.sleep(10);	
+
+	} catch (InterruptedException e) {
+
+		System.out.println("ERROR EN HILO 2 " + e);
+	}
+
+	//HILO 3
+	hilo3.start();
+	try { 
+
+		
+		hilo3.sleep(10);	
+
+	} catch (InterruptedException e) {
+
+		System.out.println("ERROR EN HILO 3 " + e);
+	}
+
+	//HILO 4
+	hilo4.start();
+	try { 
+
+		
+		hilo4.sleep(10);	
+
+	} catch (InterruptedException e) {
+
+		System.out.println("ERROR EN HILO 4 " + e);
+	}
+
+}
+
+
+
+
+	
