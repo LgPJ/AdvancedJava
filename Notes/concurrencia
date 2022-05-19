@@ -1,0 +1,53 @@
+Es la capacidad de hacer más de una cosa al mismo tiempo.
+
+Concurrencia se da cuando dos o más tareas se desarrollan en el mismo intervalo de tiempo.
+El paralelismo, el cual consiste en llevar a cabo multitareas en el mismo instante literalmente.
+
+    Beneficios:
+    *Incremento de rendimiento
+    *es el futuro
+    *Posibilidad de hacer tareas en segundo plano
+    *aplicaciones asincronas
+
+   Inconvenientes:
+    *programas mas complejos
+    *aumento del numero de errores
+    *dificil de depurar
+    *posible indeterminacion
+
+Flujo de ejecucion
+    El hilo principal se ejecuta en el MAIN, ejecutando todas las instrucciones que estan contenidas dentro de el.
+        *al llegar a la creacion del hilo.start() crea el nuevo hilo, pero sigue en su ejecucion de lineas internas.
+            Nota: al ingresar a las sentencias definidas dentro del metodo (Nuevo hilo generado) run a su vez continua con las sentencias que estan definidas dentro del hilo principal.
+
+EL ORDEN DE EJECUCION DE LOS HILOS, NO LO SABEMOS, EL CPU SE ENCARGA DE ESO......
+
+Metodo JOIN]()
+
+    Ejemplo de lanzados de hilos desde vectores
+    for(int i = 0; i < length; i++) {
+        vec[i] = new Clase();
+    }
+
+    for(int i = 0; i< vec.length; i++){
+         vec[i].start();
+    }
+
+    JOIN(): El metodo hace que este el hilo que esta en ejecucion espera que los demas hilos se ejecuten
+    este metodo es para que el hilo en curso espere a los demas
+
+    ejemplo: 
+
+    try{
+
+        vec[0].join();
+        El hilo principal va a esperar que el hilo contenido dentro de la posicion 0 del vector se ejecute
+        para asi el proceder a ejecutarse, siempre va a estar detras del hilo de esa posicion indicada
+        NOTA: no necesariamente se debe hacer despues de la ejecucion del hilo en la posicion 0, pero si siempre sera despues.
+
+    }catch(Exception ex){}
+
+    System.out.println("Principal");
+    
+
+INDETERMINISMO: cuando dos o mas hilos estan ejecutando(Escribiendo) sobre una variable compartida, el valor de dicha variable es indeterminado.
