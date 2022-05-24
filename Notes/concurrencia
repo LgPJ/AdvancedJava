@@ -22,6 +22,7 @@ Flujo de ejecucion
 
 EL ORDEN DE EJECUCION DE LOS HILOS, NO LO SABEMOS, EL CPU SE ENCARGA DE ESO......
 
+/***********************************************************************************************************/
 Metodo JOIN]()
 
     Ejemplo de lanzados de hilos desde vectores
@@ -49,5 +50,25 @@ Metodo JOIN]()
 
     System.out.println("Principal");
     
-
+/***********************************************************************************************************/
 INDETERMINISMO: cuando dos o mas hilos estan ejecutando(Escribiendo) sobre una variable compartida, el valor de dicha variable es indeterminado.
+
+Concurrencia: 
+    Se ejecuta una tarea en varios nucleos.
+    El cpu le asigna a cada tarea un tiempo determinado.
+    Dos o mas tareas no se estan ejecutando al mismo tiempo.
+
+Paralelismo:
+    Ejecucion de dos o mas tareas a la vez.
+    Se ejecuta 1 tarea e un nucleo.
+    Es mas rapido que la concurrencia.
+
+/***********************************************************************************************************/  
+Hilos dinamicos
+    La forma de saber las caracteristicas del pc donde se ejecuta el programa se usa Runtime
+        Runtime: Con esta clase podemos abrir otros programas. Por ejemplo Microsoft Word, Excel, PowerPoint, notepad, internet Explorer, etc.
+
+
+    Runtime.getRuntime(): Obtenemos el objeto que contiene los datos del procesador y sus caracteristicas.
+    runtime.availableProcessors();
+
