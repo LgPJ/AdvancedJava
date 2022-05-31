@@ -72,3 +72,37 @@ Hilos dinamicos
     Runtime.getRuntime(): Obtenemos el objeto que contiene los datos del procesador y sus caracteristicas.
     runtime.availableProcessors();
 
+/***********************************************************************************************************/ 
+Runnable y Synchronized
+
+    Con runnable se implementa y por consiguiente se debe sobre escribir el metodo run
+    El lanzado de los hilos se hace de la misma forma que extendiendo de thread
+    pero se crean objetos del tipo Runnable
+
+    Runnable clase = new Clase();
+
+    al no poder acceder desde objetos Runnable al metodo start se deben crear objetos Thread para asi, utilizar un constructor 
+    que recibe objetos tipo thread
+
+    Runnable clase = new Clase();
+    Thread hilo = new Thread(clase);
+    hilo.start();
+
+    lanzado de hilos en vectores con runnable
+    Thread[] hilos = new Thread[2];
+
+    for(int i = 0; i < hilos.length; i++){
+        Runnable run = new Clase();
+        hilos[i] = new Thread(run);
+
+        hilos[i].start();
+    }
+
+/***********************************************************************************************************/ 
+   Condicion de Guarda, wait y notifyAll
+
+   synchronized: genera una cola para eliminar indeterminacion en los hilos y que todos se ejecuten de manera ordenada
+
+   wait: genera un cola de hilos dormidos esperando la ejecucion.
+
+   notifyAll: despierta todo el conjunto de hilos que estan dormido dentro de una cola
