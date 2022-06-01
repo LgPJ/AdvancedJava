@@ -25,6 +25,8 @@ EL ORDEN DE EJECUCION DE LOS HILOS, NO LO SABEMOS, EL CPU SE ENCARGA DE ESO.....
 /***********************************************************************************************************/
 Metodo JOIN]()
 
+    Con este metodo se le indica al hilo donde esta contenido, que debe esperar a los demas hilos que sean finalizados
+
     Ejemplo de lanzados de hilos desde vectores
     for(int i = 0; i < length; i++) {
         vec[i] = new Clase();
@@ -50,6 +52,10 @@ Metodo JOIN]()
 
     System.out.println("Principal");
     
+/***********************************************************************************************************/
+    Metodo sleep()
+        Este metodo bloquea el hilo donde esta definido, es una pausa generada en milisegundos
+
 /***********************************************************************************************************/
 INDETERMINISMO: cuando dos o mas hilos estan ejecutando(Escribiendo) sobre una variable compartida, el valor de dicha variable es indeterminado.
 
