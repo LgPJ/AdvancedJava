@@ -119,3 +119,8 @@ Runnable y Synchronized
 
    NOTA: WAIT() Y NOTIFY(), SIEMPRE VAN RELACIONADOS CON EL Synchronized. Synchronized ES EL ENCARGADO DE ACTIVAR DICHOS METODOS
    
+
+/***********************************************************************************************************/ 
+
+CLASE: Timer y TimerTask
+    Estas clases sirven para programar taeras dentro de los hilos
