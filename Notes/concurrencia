@@ -112,3 +112,10 @@ Runnable y Synchronized
    wait: genera un cola de hilos dormidos esperando la ejecucion.
 
    notifyAll: despierta todo el conjunto de hilos que estan dormido dentro de una cola
+
+
+   NOTA: EL CONSUMIR Y PRODUCTOR DEBEN ESTAR SINCRONIZADOS, NO SE ACEPTA QUE EL CONSUMIDOR CONSUMA 3
+   Y EL PRODUCTOR SOLO TENGA 1, DEBEN IR EN SINCRONIZACION....
+
+   NOTA: WAIT() Y NOTIFY(), SIEMPRE VAN RELACIONADOS CON EL Synchronized. Synchronized ES EL ENCARGADO DE ACTIVAR DICHOS METODOS
+   

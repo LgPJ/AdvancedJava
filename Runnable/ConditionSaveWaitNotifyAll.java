@@ -1,3 +1,4 @@
+package Runnable;
 import java.util.Random;
 
 public class ConditionSaveWaitNotifyAll implements Runnable {

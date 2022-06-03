@@ -1,3 +1,4 @@
+package Thread;
 public class InheritanceThreadMain {
 
     public static void main(String[] args){

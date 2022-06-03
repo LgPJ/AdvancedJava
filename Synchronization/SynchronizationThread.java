@@ -1,3 +1,5 @@
+package Synchronization;
+
 public class SynchronizationThread extends Thread {
 
     static int n = 1;

@@ -1,3 +1,4 @@
+package Thread;
 public class InheritanceThread extends Thread {
 
     private String word; // Lo que va a escribir.

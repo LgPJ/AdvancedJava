@@ -1,3 +1,4 @@
+package Thread;
 public class IndeterminismThread extends Thread{
 
     private static int count = 0;

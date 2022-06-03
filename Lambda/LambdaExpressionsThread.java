@@ -1,3 +1,4 @@
+package Lambda;
 public class LambdaExpressionsThread {
 
     public static void main(String[] args) {
