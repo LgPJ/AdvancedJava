@@ -124,3 +124,12 @@ Runnable y Synchronized
 
 CLASE: Timer y TimerTask
     Estas clases sirven para programar taeras dentro de los hilos
+
+/***********************************************************************************************************/ 
+
+    Framework EXECUTOR: disponible desde JDK 5
+    Un marco que tiene un montón de componentes que se utilizan para administrar los subprocesos de trabajo de manera 
+    eficiente se conoce como Executor Framework . La API Executor reduce la ejecución de la tarea de la tarea real que 
+    se ejecutará a través de los Ejecutores . El marco ejecutor es una implementación del patrón Productor-Consumidor . 
+    La clase java.util.concurrent.Executors proporciona un conjunto de métodos para crear ThreadPools de subprocesos de 
+    trabajo.  

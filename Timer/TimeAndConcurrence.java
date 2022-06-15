@@ -1,3 +1,4 @@
+package Timer;
 import java.util.Random;
 
 public class TimeAndConcurrence extends Thread {
