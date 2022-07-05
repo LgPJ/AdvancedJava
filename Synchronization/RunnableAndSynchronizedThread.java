@@ -1,3 +1,4 @@
+package Synchronization;
 public class RunnableAndSynchronizedThread implements Runnable {
 
     private static int count = 0;
